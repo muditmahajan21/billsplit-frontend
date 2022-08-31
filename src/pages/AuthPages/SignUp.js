@@ -1,20 +1,34 @@
 import React from "react";
 import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { postService } from "../../services/httpServices";
 
 const SignUp = () => {
 
   const [form] = Form.useForm();
 
   const submitForm = async () => {
-    try {
-      const values = await form.validateFields();
-      console.log(values);
-    } catch (error) {
+    const values = await form.validateFields();
+    console.log(values);
+    if(values.password !== values.confirmPassword) {
       notification.error({
         message: "Error",
-        description: "Please fill all the fields",
+        description: "Passwords do not match",
       });
+    } else {
+      const response = await postService("/users", values);
+      if(response.data.status) {
+        notification.success({
+          message: "Success",
+          description: "Verification link has been sent to your email",
+        });
+        form.resetFields();
+      } else {
+        notification.error({
+          message: "Error",
+          description: response.data.error,
+        })
+      }
     }
   }
 
