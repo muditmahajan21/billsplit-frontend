@@ -3,6 +3,7 @@ import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { postService } from "../../services/httpServices";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 const LogIn = () => {
 
@@ -31,9 +32,10 @@ const LogIn = () => {
 
   return (
     <>
+      <Header />
       <div
         style={{
-          marginTop: "7%",
+          marginTop: "5%",
           marginLeft: "12%",
         }}
       >
