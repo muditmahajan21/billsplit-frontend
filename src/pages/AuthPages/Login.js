@@ -2,35 +2,31 @@ import React from "react";
 import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { postService } from "../../services/httpServices";
+import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const LogIn = () => {
 
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const submitForm = async () => {
     const values = await form.validateFields();
-    console.log(values);
-    if(values.password !== values.confirmPassword) {
+    
+    const response = await postService("/login", values);
+    if(response.data.status) {
+      notification.success({
+        message: "Success",
+        description: "Log in successful",
+      });
+      form.resetFields();
+      localStorage.setItem("token", response.data.data.token);
+    } else {
       notification.error({
         message: "Error",
-        description: "Passwords do not match",
-      });
-    } else {
-      const response = await postService("/login", values);
-      if(response.data.status) {
-        notification.success({
-          message: "Success",
-          description: "Log in successful",
-        });
-        form.resetFields();
-        localStorage.setItem("token", response.data.token);
-      } else {
-        notification.error({
-          message: "Error",
-          description: response.data.error,
-        })
-      }
+        description: response.data.error,
+      })
     }
+  
   }
 
   return (
@@ -38,7 +34,7 @@ const SignUp = () => {
       <div
         style={{
           marginTop: "7%",
-          marginLeft: "10%",
+          marginLeft: "12%",
         }}
       >
         <Row gutter={[16, 16]}>
@@ -46,7 +42,7 @@ const SignUp = () => {
             span={12} 
           >
             <Image 
-              src="/images/signup.jpg" 
+              src="/images/login.jpg" 
               alt="signup"
               preview={false}
               width="80%" 
@@ -54,7 +50,7 @@ const SignUp = () => {
           </Col>
           <Col span={6}
             style={{
-              paddingTop: "2%",
+              paddingTop: "10%",
             }}
           >
             <h1>
@@ -107,6 +103,18 @@ const SignUp = () => {
               >
                 Log In
               </Button>
+              <Button 
+                ghost
+                style={{
+                  float: "right"
+                }}
+                type="primary"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                Sign Up
+              </Button>
             </Form>
           </Col>
         </Row>
@@ -116,4 +124,4 @@ const SignUp = () => {
 }
 
 
-export default SignUp;
+export default LogIn;

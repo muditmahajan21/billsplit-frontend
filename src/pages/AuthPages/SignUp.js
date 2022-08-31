@@ -2,14 +2,15 @@ import React from "react";
 import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { postService } from "../../services/httpServices";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
   const [form] = Form.useForm();
-
+  const navigate = useNavigate();
   const submitForm = async () => {
     const values = await form.validateFields();
-    console.log(values);
+ 
     if(values.password !== values.confirmPassword) {
       notification.error({
         message: "Error",
@@ -155,6 +156,18 @@ const SignUp = () => {
                 }}
               >
                 Sign Up
+              </Button>
+              <Button 
+                ghost
+                style={{
+                  float: "right"
+                }}
+                type="primary"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Log In
               </Button>
             </Form>
           </Col>
