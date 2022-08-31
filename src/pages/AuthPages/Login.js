@@ -66,7 +66,7 @@ const LogIn = () => {
               name="complex-form"
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
-              initialValues={{ remember: true }}
+              initialValues={{ remember: false }}
               autoComplete="off"
               requiredMark
               form={form}
