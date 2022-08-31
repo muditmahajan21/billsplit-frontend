@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Image, } from "antd";
+import { Col, Row, Image, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
@@ -48,10 +48,34 @@ const HomePage = () => {
               Bill Split is a web application to help share expenses securely and quickly among friends.
             </h3>
             <p>
-              Already a user? <a onClick={() => navigate("/login")}>Log In</a>
+              Already a user? 
+              <Button 
+                ghost
+                style={{
+                  border: "none"
+                }}
+                type="primary"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Log In
+              </Button>
             </p>
             <p>
-              New to Bill Split? <a onClick={() => navigate("/signup")}>Sign Up</a>
+              New to Bill Split? 
+              <Button 
+                ghost
+                style={{
+                  border: "none"
+                }}
+                type="primary"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                Sign Up
+              </Button>
             </p>
           </Col>
         </Row>
