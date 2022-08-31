@@ -23,6 +23,7 @@ const SignUp = () => {
           description: "Log in successful",
         });
         form.resetFields();
+        localStorage.setItem("token", response.data.token);
       } else {
         notification.error({
           message: "Error",
