@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Image, } from "antd";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const HomePage = () => {
 
@@ -8,10 +9,10 @@ const HomePage = () => {
 
   return (
     <>
-    
+      <Header />
       <div
         style={{
-          marginTop: "7%",
+          marginTop: "5%",
           marginLeft: "15%",
         }}
       >
