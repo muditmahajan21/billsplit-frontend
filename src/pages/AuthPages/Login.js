@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { postService } from "../../services/httpServices";
@@ -10,11 +10,14 @@ const LogIn = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const submitForm = async () => {
     const values = await form.validateFields();
-    
+    setLoading(true);
     const response = await postService("/login", values);
     if(response.data.status) {
+      setLoading(false);
       notification.success({
         message: "Success",
         description: "Log in successful",
@@ -22,6 +25,7 @@ const LogIn = () => {
       form.resetFields();
       localStorage.setItem("token", response.data.data.token);
     } else {
+      setLoading(false);
       notification.error({
         message: "Error",
         description: response.data.error,
@@ -98,6 +102,7 @@ const LogIn = () => {
                 />
               </Form.Item>
               <Button 
+                loading={loading}
                 type="primary"
                 onClick={() => {
                   submitForm();

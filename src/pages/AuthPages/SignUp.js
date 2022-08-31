@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Form, notification, Image, Input, Button } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { postService } from "../../services/httpServices";
@@ -9,23 +9,29 @@ const SignUp = () => {
 
   const [form] = Form.useForm();
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
   const submitForm = async () => {
     const values = await form.validateFields();
- 
+    setLoading(true);
     if(values.password !== values.confirmPassword) {
       notification.error({
         message: "Error",
         description: "Passwords do not match",
       });
+      setLoading(false);
     } else {
       const response = await postService("/users", values);
       if(response.data.status) {
+        setLoading(false);
         notification.success({
           message: "Success",
           description: "Verification link has been sent to your email",
         });
         form.resetFields();
       } else {
+        setLoading(false);
         notification.error({
           message: "Error",
           description: response.data.error,
@@ -152,6 +158,7 @@ const SignUp = () => {
                 />
               </Form.Item>
               <Button 
+                loading={loading}
                 type="primary"
                 onClick={() => {
                   submitForm();
