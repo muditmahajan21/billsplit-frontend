@@ -123,6 +123,19 @@ const LogIn = () => {
                 Sign Up
               </Button>
             </Form>
+            <br />
+            <Button 
+              ghost
+              style={{
+                border: "none"
+              }}
+              type="primary"
+              onClick={() => {
+                navigate("/reset-password");
+              }}
+            >
+              Forgot Password?
+            </Button>
           </Col>
         </Row>
       </div>

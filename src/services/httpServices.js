@@ -5,6 +5,12 @@ const postService = async (url, data) => {
     return response
 };
 
+const putService = async (url, data) => {
+  const response = await instance.put(url, data);
+  return response
+};
+
 export {
-  postService
+  postService,
+  putService
 }
