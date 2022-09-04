@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { putService } from "../../services/httpServices";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { useSearchParams } from "react-router-dom";
 
 const UpdatePassword = () => {
   
@@ -90,7 +89,7 @@ const UpdatePassword = () => {
                   },
                   {
                     pattern: new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/),
-                    message: "Password must contain at least 8 characters, one uppercase, one lowercase and one number",
+                    message: "Password must contain at least 8 c+haracters, one uppercase, one lowercase and one number",
                   }
                 ]}
               >
