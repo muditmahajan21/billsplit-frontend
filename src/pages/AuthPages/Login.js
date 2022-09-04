@@ -24,6 +24,7 @@ const LogIn = () => {
       });
       form.resetFields();
       localStorage.setItem("token", response.data.data.token);
+      navigate("/dashboard");
     } else {
       setLoading(false);
       notification.error({

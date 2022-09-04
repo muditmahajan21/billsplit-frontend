@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ResetPassword from './pages/AuthPages/ResetPassword';
 import UpdatePassword from './pages/AuthPages/UpdatePassword';
 import VerifyUser from './pages/AuthPages/VerifyUser';
+import DashBoard from './pages/DashBoard/DashBoard';
 import './App.css';
 
 const App = () => { 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/update-password/*" element={<UpdatePassword />} />
         <Route path="/verify-email/*" element={<VerifyUser />} />
+        <Route path="/dashboard" element={<DashBoard /> } />
       </Routes>
     </>
   )
