@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Button, Form, Input, Row, Col, Select } from "antd";
+import { Breadcrumb, Button, Form, Input, Row, Col, Select, notification } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { getService } from "../../../services/httpServices";
+import { getService, postServiceWithToken } from "../../../services/httpServices";
 const CreateGroup = () => {
 
   const [form] = Form.useForm();
   const [users, setUsers] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const getUsers = async () => {
     const response = await getService("/users");
@@ -14,10 +15,31 @@ const CreateGroup = () => {
     }
   }
 
+  const submitForm = async () => {
+    const values = await form.validateFields();
+    setLoading(true);
+    const response = await postServiceWithToken(
+      "/groups",
+      values
+    );
+    if(response.status) {
+      setLoading(false);
+      notification.success({
+        message: "Group Created Successfully"
+      })
+    } else {
+      setLoading(false);
+      notification.error({
+        message: response.error
+      })
+    }
+  }
+
   useEffect(() => {
     getUsers();
   }, []);
 
+ 
   return (
     <div>
       <Breadcrumb 
@@ -104,51 +126,36 @@ const CreateGroup = () => {
           <h2>
             Add Members By Email ID
           </h2>
-          <Form.List name="members"
-            initialValue={[""]}
+          <Form.Item
+            label="Member Email IDs"
+            name="members"
+            rules={[
+              {
+                required: true,
+                message: "Missing email",
+              },
+            ]}
           >
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map((field) => (
-                  <Form.Item
-                    {...field}
-                    label="Member Email ID"
-                    name={[field.name, "email"]}
-                    fieldKey={[field.fieldKey, "email"]}
-                    rules={[
-                      {
-                        required: true,
-                        message: "Missing email",
-                      },
-                    ]}
-                  >
-                    <Select >
-                      {users.map((user) => (
-                        <Select.Option value={user.email}>{user.email}</Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                ))}
-                <Form.Item
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      add();
-                    }}
-                  >
-                    <PlusCircleOutlined /> Add Member
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
+            <Select 
+              mode="multiple"
+            >
+              {users.map((user) => (
+                <Select.Option value={user.id} key={user.email}> {user.email} </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
         </Col>
-        
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={24} offset={20}>
+            <Button 
+              type="primary"
+              onClick={() => {submitForm()}}
+              loading={loading}
+            >
+              Create Group
+            </Button>
+          </Col>
         </Row>
       </Form>
     </div>
