@@ -1,10 +1,22 @@
-import React from "react";
-import { Breadcrumb, Button, Form, Input, Row, Col } from "antd";
+import React, { useEffect } from "react";
+import { Breadcrumb, Button, Form, Input, Row, Col, Select } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
-
+import { getService } from "../../../services/httpServices";
 const CreateGroup = () => {
 
   const [form] = Form.useForm();
+  const [users, setUsers] = React.useState([]);
+
+  const getUsers = async () => {
+    const response = await getService("/users");
+    if(response.data.status) {
+      setUsers(response.data.data);
+    }
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div>
@@ -110,7 +122,11 @@ const CreateGroup = () => {
                       },
                     ]}
                   >
-                    <Input />
+                    <Select >
+                      {users.map((user) => (
+                        <Select.Option value={user.email}>{user.email}</Select.Option>
+                      ))}
+                    </Select>
                   </Form.Item>
                 ))}
                 <Form.Item
