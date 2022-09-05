@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Breadcrumb, Button, Form, Input, Row, Col, Select, notification } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
 import { getService, postServiceWithToken } from "../../../services/httpServices";
 const CreateGroup = () => {
 
