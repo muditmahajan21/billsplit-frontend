@@ -5,6 +5,9 @@ import LoggedInHeader from "../../components/LoggedInHeader";
 import SideBar from "../../components/SideBar";
 import GroupPage from "./GroupPages/GroupPage";
 import CreateGroup from "./GroupPages/CreateGroup";
+import BillPage from "./BillPages/BillPage";
+import CreateBill from "./BillPages/CreateBill";
+
 const DashBoard = () => {
 
   return (
@@ -34,6 +37,8 @@ const DashBoard = () => {
               <Route path="/" element={<GroupPage />} />
               <Route path="/groups" element={<GroupPage />} />
               <Route path="/groups/create-group" element={<CreateGroup />} />
+              <Route path="/bills" element={<BillPage />} />
+              <Route path="/groups/create-bill" element={<CreateBill />} />
             </Routes>
           </Layout.Content>
         </Layout>
