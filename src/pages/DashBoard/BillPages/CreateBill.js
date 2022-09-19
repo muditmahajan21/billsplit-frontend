@@ -1,6 +1,6 @@
 import { useState, React, useEffect } from "react";
 import { Breadcrumb, Button, Form, Input, Row, Col, Select, notification, InputNumber, DatePicker } from "antd";
-import { getService, postServiceWithToken, getServiceWithToken } from "../../../services/httpServices";
+import { postServiceWithToken, getServiceWithToken } from "../../../services/httpServices";
 
 const CreateBill = () => {
 
