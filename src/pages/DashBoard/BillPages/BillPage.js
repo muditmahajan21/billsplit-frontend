@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Breadcrumb, Button, notification, Table } from "antd";
-import { PlusCircleOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, DeleteOutlined, EditOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { deleteServiceWithToken, getServiceWithToken } from "../../../services/httpServices";
 
@@ -44,6 +44,31 @@ const BillPage = () => {
         return record.paidBy.name;
       }
     },
+    {
+      key: "7",
+      title: "Settled",
+      render: (record) => {
+        return record.isSettled ? (
+        <>
+          <CheckOutlined 
+            style={{
+              color: "green",
+            }}
+          />
+        </>
+        )
+        :
+        (
+          <>
+          <CloseOutlined 
+            style={{
+              color: "red",
+            }}
+          />
+          </>
+        )
+      }
+    }
   ]
 
   const getBills = async () => {

@@ -52,7 +52,11 @@ const GroupPage = () => {
                 await handleDelete(record.id);
               }}
             >
-              <DeleteOutlined />
+              <DeleteOutlined 
+                style={{
+                  color: "red",
+                }}
+              />
             </Button>
             <EditOutlined />
           </div>
