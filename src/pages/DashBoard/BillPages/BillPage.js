@@ -1,8 +1,8 @@
 import { React, useState } from "react";
-import { Breadcrumb, Button, notification, Table } from "antd";
-import { PlusCircleOutlined, DeleteOutlined, EditOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { Breadcrumb, Button, Table } from "antd";
+import { PlusCircleOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { deleteServiceWithToken, getServiceWithToken } from "../../../services/httpServices";
+import { getServiceWithToken } from "../../../services/httpServices";
 
 const BillPage = () => {
 
