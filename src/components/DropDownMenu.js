@@ -18,6 +18,7 @@ const DropdownMenu = () => {
               }}
               onClick={() => {
                 window.localStorage.removeItem("token");
+                window.localStorage.removeItem("billsplitUserId");
                 navigate("/");
               }}
             >

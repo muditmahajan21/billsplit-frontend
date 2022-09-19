@@ -24,6 +24,7 @@ const LogIn = () => {
       });
       form.resetFields();
       localStorage.setItem("token", response.data.data.token);
+      localStorage.setItem("billsplitUserId", response.data.data.id);
       navigate("/dashboard");
     } else {
       setLoading(false);

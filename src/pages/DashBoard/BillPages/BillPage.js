@@ -14,11 +14,46 @@ const BillPage = () => {
       key: "1",
       title: "Name",
       dataIndex: "name"
-    }
+    },
+    {
+      key: "2",
+      title: "Description",
+      dataIndex: "description"
+    },
+    {
+      key: "3",
+      title: "Total Amount",
+      dataIndex: "amount"
+    },
+    {
+      key: "4",
+      title: "Date",
+      dataIndex: "date"
+    },
+    {
+      key: "5",
+      title: "Group",
+      render: (record) => {
+        return record.group.name;
+      }
+    },
+    {
+      key: "6",
+      title: "Paid By",
+      render: (record) => {
+        return record.paidBy.name;
+      }
+    },
   ]
 
   const getBills = async () => {
-
+    const id = window.localStorage.getItem("billsplitUserId");
+    const {status, data} = await getServiceWithToken(
+      "/bills/" + id
+    )
+    if(status) {
+      setBills(data.data);
+    }
   }
 
   useState(() => {

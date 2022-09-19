@@ -16,10 +16,12 @@ const CreateBill = () => {
     }
   }
 
-  const getUsers = async () => {
-    const response = await getService("/users");
+  const getUsers = async (id) => {
+    const response = await getServiceWithToken("/groups/" + id);
+    console.log(response);
     if(response.data.status) {
-      setMembers(response.data.data);
+      console.log(response.data.data);
+      setMembers(response.data.data.members);
     }
   }
 
@@ -44,9 +46,14 @@ const CreateBill = () => {
   }
 
   useEffect(() => {
-    getUsers();
     getGroups();
   }, []);
+
+  useEffect(() => {
+  }, [
+    members,
+    groups
+  ])
 
   return (
     <div>
@@ -172,7 +179,11 @@ const CreateBill = () => {
                 }
               ]}
             >
-              <Select>
+              <Select
+                 onChange={(e) => {
+                  getUsers(e);
+                }}
+              >
                 {groups.map((group) => (
                   <Select.Option 
                     value={group.id}
